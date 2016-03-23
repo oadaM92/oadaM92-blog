@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <!-- <script src="http://libs.baidu.com/zepto/0.8/zepto.min.js"></script> -->
+</head>
+
+<body>
+    <table border=1>
+        <tr><td><button id='do'>Do long calc - bad status!</button></td>
+            <td><div id='status'>Not Calculating yet.</div></td>
+        </tr>
+        <tr><td><button id='do_ok'>Do long calc - good status!</button></td>
+            <td><div id='status_ok'>Not Calculating yet.</div></td>
+        </tr>
+    </table>
+
+    <script>
+    var status_ok = document.getElementById('status_ok');
+    var do_ = document.getElementById('do');
+    var status = document.getElementById('status');
+    var do_ok = document.getElementById('do_ok');
+
+    function long_running(status_div) {
+
+        var result = 0;
+        // Use 1000/700/300 limits in Chrome, 
+        //    300/100/100 in IE8, 
+        //    1000/500/200 in FireFox
+        // I have no idea why identical runtimes fail on diff browsers.
+        for (var i = 0; i < 1000; i++) {
+            for (var j = 0; j < 700; j++) {
+                for (var k = 0; k < 300; k++) {
+                    result = result + i + j + k;
+                }
+            }
+        }
+        document.getElementById(status_div).innerText = 'calclation done';
+    }
+
+    // Assign events to buttons
+    do_.onclick = function() {
+        status.innerText = 'calculating....';
+        long_running('status');
+    };
+
+    do_ok.onclick = function() {
+        status_ok.innerText = 'calculating...';
+        window.setTimeout(function() {long_running('status_ok')}, 0);
+    };
+    </script>
+</body>
+
+</html>
