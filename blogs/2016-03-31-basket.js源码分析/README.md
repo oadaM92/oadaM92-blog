@@ -31,15 +31,15 @@ basket.js 的使用非常简单，只要引入相应的js脚本，然后使用 b
 
 **第一次加载，**由于helloworld.js 只有一行代码`alert('hello world');`， 所以运行该demo时就会弹出 "hello world"。并且对应的 js 会被保存到 LocalStorage：
 
-![微信截图_20160401220017](demo\微信截图_20160401220017.png)
+![微信截图_20160401220017](demo/微信截图_20160401220017.png)
 
 此时对应的资源加载情况：
 
-![微信截图_20160401221723](demo\微信截图_20160401221723.png)
+![微信截图_20160401221723](demo/微信截图_20160401221723.png)
 
 **刷新一次页面，**再查看一次资源的加载情况：
 
-![after-save-ls](demo\after-save-ls.png)
+![after-save-ls](demo/after-save-ls.png)
 
 可以看到已经没有再发送 helloworld.js 相关的请求，因为 LocalStorage 上已经有对应的缓存了，直接从本地获取即可。
 
@@ -49,7 +49,7 @@ basket.js 的使用非常简单，只要引入相应的js脚本，然后使用 b
 
 ###流程图
 
- ![basket.js架构](demo\basket.js架构.png)
+ ![basket.js架构](demo/basket.js架构.png)
 
 
 
@@ -413,9 +413,9 @@ basket.require({
 		}
 
 		obj.key =  ( obj.key || obj.url );
-        
+
 		source = basket.get( obj.key );
-                
+
 		obj.execute = obj.execute !== false;
 
 		shouldFetch = isCacheValid(source, obj); // 判断缓存是否还有效
@@ -544,7 +544,7 @@ basket.require({
 					inBasket.push(arguments[a].url);
 				}
 			}
-                        
+
 			var promise = fetch.apply( null, arguments ).then( performActions );
 
 			promise.thenRequire = thenRequire;
@@ -555,10 +555,10 @@ basket.require({
 			localStorage.removeItem( storagePrefix + key );
 			return this;
 		},
-        
+
 		// 根据key值获取对应ls的value
 		get: function( key ) {
-            
+
 			var item = localStorage.getItem( storagePrefix + key );
 			try	{
 				return JSON.parse( item || 'false' );
@@ -608,8 +608,6 @@ basket.require({
 })( this, document );
 
 ```
-
-
 
 
 
